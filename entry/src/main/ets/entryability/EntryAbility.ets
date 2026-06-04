@@ -158,12 +158,30 @@ export default class EntryAbility extends UIAbility {
     try {
       this.mainWindow = windowStage.getMainWindowSync();
 
+      // Calculate cutout safe area to prevent punch-hole camera overlap
+      let cutoutTopVp = 0;
+      try {
+        let cutoutArea = this.mainWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_CUTOUT);
+        cutoutTopVp = px2vp(cutoutArea.topRect.height);
+        FileLog.i(TAG, `cutout top area: ${cutoutTopVp}vp`);
+      } catch (e) {
+        FileLog.w(TAG, `getWindowAvoidArea(CUTOUT) failed: ${(e as Error).message}`);
+      }
+
+      // Ensure topBarExtraHeight >= cutout height
+      if (cutoutTopVp > 0) {
+        let current = AppStorage.get<number>('topBarExtraHeight') ?? 0;
+        let effective = Math.max(current, cutoutTopVp);
+        AppStorage.setOrCreate('topBarExtraHeight', effective);
+        FileLog.i(TAG, `topBarExtraHeight clamped: ${current} -> ${effective} (cutout=${cutoutTopVp})`);
+      }
+
       let isDark = this.context.config.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK;
 
       FileLog.i(TAG, `窗口初始化: isDark=${isDark}`);
       hilog.info(DOMAIN, TAG, '窗口初始化: isDark=%{public}s', isDark.toString());
 
-      
+
       setupImmersiveLight(this.mainWindow, isDark).then((result) => {
         hilog.info(DOMAIN, TAG, '沉浸光感结果: %{public}s', result.summary.replace(/\n/g, ' | '));
         FileLog.i(TAG, `沉浸光感结果:\n${result.summary}`);

@@ -897,7 +897,7 @@ struct Settings {
                   Slider({
                     value: this.topBarExtraHeight,
                     min: 0,
-                    max: 50,
+                    max: 80,
                     step: 2,
                     style: SliderStyle.OutSet
                   })

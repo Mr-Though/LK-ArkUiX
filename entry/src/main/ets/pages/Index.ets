@@ -513,7 +513,7 @@ struct Index {
               Slider({
                 value: this.guideTopBarValue,
                 min: 0,
-                max: 50,
+                max: 80,
                 step: 2,
                 style: SliderStyle.OutSet
               })
