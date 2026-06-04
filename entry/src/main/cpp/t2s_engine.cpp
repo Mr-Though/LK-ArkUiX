@@ -1,6 +1,3 @@
-#ifndef __ANDROID__
-#include "bisheng_fix.h"
-#endif
 #include <utility>
 #include <vector>
 #include <string>

@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\21403\\.ohos\\config\\default_LK_aDbUXlBsuL1kIPUOBvtwMf-lfHKEAsBEqTxq8Mf0A_M=.cer",
+          "certpath": "/Users/mr.though/.ohos/config/default_LK-ArkUiX_D_uTKtk9nESL9dGnoLS-v7TPYclLYBLaRvgduRh5Ad8=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001992112D86A05061C3AF9D1229213C0ABF5C0BAE0EFD5C2E52253E0EB5A209079B9E1CA3CA4C",
-          "profile": "C:\\Users\\21403\\.ohos\\config\\default_LK_aDbUXlBsuL1kIPUOBvtwMf-lfHKEAsBEqTxq8Mf0A_M=.p7b",
+          "keyPassword": "0000001ACD8868A5DBF1424DADC43AB7B5849601F5342F9DA91546F4EC5FF46E88F70372587F3ED1C716",
+          "profile": "/Users/mr.though/.ohos/config/default_LK-ArkUiX_D_uTKtk9nESL9dGnoLS-v7TPYclLYBLaRvgduRh5Ad8=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\21403\\.ohos\\config\\default_LK_aDbUXlBsuL1kIPUOBvtwMf-lfHKEAsBEqTxq8Mf0A_M=.p12",
-          "storePassword": "0000001924CF9A72368076A7A5BAE473710B3E89CFA1DE9AC1FF824C95B881383EFEA81078802503C8"
+          "storeFile": "/Users/mr.though/.ohos/config/default_LK-ArkUiX_D_uTKtk9nESL9dGnoLS-v7TPYclLYBLaRvgduRh5Ad8=.p12",
+          "storePassword": "0000001AF571F152AEB13F8F01257234DBCC40472C4588574A4C8D3BA10DE85AF9C09C0249D76960AEB3"
         }
       }
     ],
@@ -19,7 +19,7 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "6.1.0(23)",
+        "targetSdkVersion": "6.1.1(24)",
         "compatibleSdkVersion": "6.1.0(23)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {

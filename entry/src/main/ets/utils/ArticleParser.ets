@@ -263,7 +263,12 @@ export class ArticleParser {
   
   private static extractDomain(url: string): string {
     try {
-      let noProtocol = url.replace(/^https?:\/\
+      let noProtocol = url;
+      if (noProtocol.startsWith('https://')) {
+        noProtocol = noProtocol.substring(8);
+      } else if (noProtocol.startsWith('http://')) {
+        noProtocol = noProtocol.substring(7);
+      }
       let slashIdx = noProtocol.indexOf('/');
       if (slashIdx > 0) {
         return noProtocol.substring(0, slashIdx);
@@ -402,8 +407,10 @@ export class ArticleParser {
       } else if (p.startsWith('%%LINK_PH%%')) {
         // ✨ iframe/media 嵌入链接
         let linkUrl = p.replace('%%LINK_PH%%', '').replace('%%LINK_END%%', '').trim();
-        if (linkUrl.startsWith('http:
-          if (linkUrl.startsWith('//')) linkUrl = 'https:' + linkUrl;
+        if (linkUrl.startsWith('//')) {
+          linkUrl = 'https:' + linkUrl;
+        }
+        if (linkUrl.startsWith('http://') || linkUrl.startsWith('https://')) {
           let item = new ContentItem();
           item.type = 'link';
           item.value = ArticleParser.extractDomain(linkUrl);
@@ -463,9 +470,10 @@ export class ArticleParser {
     match = imgRegex.exec(processed);
 
     while (match !== null) {
-      
-      if (match.index > lastIndex) {
-        let textPart = processed.substring(lastIndex, match.index).trim();
+      let m = match;
+
+      if (m.index > lastIndex) {
+        let textPart = processed.substring(lastIndex, m.index).trim();
         if (textPart.length > 0) {
           let spans = ArticleParser.parseBBCodeSpans(textPart);
           if (spans.length > 0) {
@@ -480,7 +488,7 @@ export class ArticleParser {
       }
 
       
-      let imgUrl = match[1];
+      let imgUrl = m[1];
       if (imgUrl && imgUrl.length > 0) {
         let imgItem = new ContentItem();
         imgItem.type = 'image';
@@ -493,7 +501,7 @@ export class ArticleParser {
         items.push(imgItem);
       }
 
-      lastIndex = match.index + match[0].length;
+      lastIndex = m.index + m[0].length;
       match = imgRegex.exec(processed);
     }
 
